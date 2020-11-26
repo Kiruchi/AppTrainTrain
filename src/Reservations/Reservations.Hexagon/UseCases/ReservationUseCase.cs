@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Reservations.Hexagon.PrimaryPorts;
 using Reservations.Hexagon.SecondaryPorts;
@@ -31,30 +30,17 @@ namespace Reservations.Hexagon.UseCases
             var train = await _trainRepository.GetTrainDuVoyageAsync(idVoyage);
             if (train == null)
                 throw new NotFoundException<int>(idVoyage);
-
-            var voitureAvecDeLaPlace =
-                train.Voitures
-                    .FirstOrDefault(v => PeutReserverPlacesSansDepasserSeuil(v, passagers.Count));
             
-            if (voitureAvecDeLaPlace == null)
+            if (!train.PeutReserver(passagers.Count, SeuilCapacite))
                 throw new ArgumentException("train plein");
 
-            voitureAvecDeLaPlace.PlacesOccupees += passagers.Count;
+            var reservation = train.Reserver(passagers, SeuilCapacite);
+            
+            // Refacto : Save en une seule fois
             await _trainRepository.SaveAsync(train);
-
-            var reservation =
-                new Reservation
-                {
-                    IdVoyage = idVoyage,
-                    Passagers = passagers,
-                    NumeroVoiture = voitureAvecDeLaPlace.Numero
-                };
             await _reservationRepository.SaveAsync(reservation);
 
             await _notifieur.NotifierReservationValideeAsync(reservation);
         }
-
-        private static bool PeutReserverPlacesSansDepasserSeuil(Voiture voiture, int nbPassagers) =>
-            voiture.PlacesOccupees + nbPassagers < voiture.Capacite * SeuilCapacite;
     }
 }

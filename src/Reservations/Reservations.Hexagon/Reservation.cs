@@ -4,8 +4,17 @@ namespace Reservations.Hexagon
 {
     public class Reservation
     {
-        public int IdVoyage { get; set; }
-        public IReadOnlyCollection<Passager> Passagers { get; set; }
-        public int NumeroVoiture { get; set; }
+        public Reservation(int idVoyage, IReadOnlyCollection<Passager> passagers, int numeroVoiture)
+        {
+            IdVoyage = idVoyage;
+            Passagers = passagers;
+            NumeroVoiture = numeroVoiture;
+        }
+
+        public int IdVoyage { get; }
+
+        public IReadOnlyCollection<Passager> Passagers { get; }
+
+        public int NumeroVoiture { get; }
     }
 }
