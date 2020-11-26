@@ -17,6 +17,7 @@
       <ProjectReference Include="..\Reservations\Reservations.Web\Reservations.Web.csproj" />
       <ProjectReference Include="..\Shared\Shared.Core\Shared.Core.csproj" />
       <ProjectReference Include="..\Shared\Shared.Web\Shared.Web.csproj" />
+      <ProjectReference Include="..\Voyages\Voyages.Web\Voyages.Web.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Shared.Core\Shared.Core.csproj" />
+      <ProjectReference Include="..\..\Shared\Shared.Web\Shared.Web.csproj" />
+      <ProjectReference Include="..\Voyages.Hexagon\Voyages.Hexagon.csproj" />
+      <ProjectReference Include="..\Voyages.Infra\Voyages.Infra.csproj" />
+    </ItemGroup>
+
+
+</Project>

@@ -9,6 +9,7 @@ namespace Application.Web
             new CompositeBoundedContextRegistration(
                 new Flotte.Web.ContainerRegistration(serviceContainer),
                 new Reseau.Web.ContainerRegistration(serviceContainer),
+                new Voyages.Web.ContainerRegistration(serviceContainer),
                 new Reservations.Web.ContainerRegistration(serviceContainer));
     }
 }
