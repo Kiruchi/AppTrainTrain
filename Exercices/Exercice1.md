@@ -2,8 +2,8 @@
 
 ## Prérequis
 
-1. Créer une nouvelle base de données nommée TRAIN_TRAIN
-2. Exécuter le fichier `0_SeedDatabase.bat`
+Cloner / Forker : https://github.com/cmoinard/AppTrainTrain
+Tag : Exercice1
 
 
 ## But de l'exercice
