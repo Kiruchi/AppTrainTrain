@@ -45,6 +45,9 @@ namespace Shared.Core.DomainModeling
 
         public static bool operator >=(ComparableValueObject<T> v1, ComparableValueObject<T> v2) => 
             v1.InternalValue.CompareTo(v2.InternalValue) >= 0;
+        
+        public static explicit operator T(ComparableValueObject<T> valueObject) => 
+            valueObject.InternalValue;
     }
 
     public abstract class StringBasedValueObject : SimpleValueObject<string>
