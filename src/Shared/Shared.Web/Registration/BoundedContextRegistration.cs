@@ -5,11 +5,11 @@ namespace Shared.Web.Registration
 {
     public abstract class BoundedContextRegistration : IBoundedContextRegistration
     {
-        protected IContainer Container { get; }
+        protected IServiceContainer ServiceContainer { get; }
 
-        protected BoundedContextRegistration(IContainer container)
+        protected BoundedContextRegistration(IServiceContainer serviceContainer)
         {
-            Container = container;
+            ServiceContainer = serviceContainer;
         }
 
         public virtual void RegisterServices()

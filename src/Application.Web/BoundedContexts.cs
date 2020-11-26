@@ -5,9 +5,10 @@ namespace Application.Web
 {
     public static class BoundedContexts
     {
-        public static IBoundedContextRegistration RegisterAllBoundedContexts(IContainer container) =>
+        public static IBoundedContextRegistration RegisterAllBoundedContexts(IServiceContainer serviceContainer) =>
             new CompositeBoundedContextRegistration(
-                new Flotte.Web.ContainerRegistration(container),
-                new Reservations.Web.ContainerRegistration(container));
+                new Flotte.Web.ContainerRegistration(serviceContainer),
+                new Reseau.Web.ContainerRegistration(serviceContainer),
+                new Reservations.Web.ContainerRegistration(serviceContainer));
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Shared.Web
 {
-    public interface IContainer
+    public interface IServiceContainer
     {
         void Register<TInterface, T>() 
             where TInterface : class

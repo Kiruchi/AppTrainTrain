@@ -5,12 +5,16 @@ using Microsoft.Extensions.Configuration;
 
 namespace Flotte.Web.Db
 {
-    public class ProductCatalogContextFactory : IDesignTimeDbContextFactory<FlotteContext>
+    public class FlotteContextFactory : IDesignTimeDbContextFactory<FlotteContext>
     {
         public FlotteContext CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(
+                    Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "../../Application.Web"
+                    ))
                 .AddJsonFile("appsettings.json")
                 .Build();
 

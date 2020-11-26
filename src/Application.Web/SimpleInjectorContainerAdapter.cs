@@ -3,7 +3,7 @@ using SimpleInjector;
 
 namespace Application.Web
 {
-    public class SimpleInjectorContainerAdapter : IContainer
+    public class SimpleInjectorContainerAdapter : IServiceContainer
     {
         private readonly Container _container;
 
