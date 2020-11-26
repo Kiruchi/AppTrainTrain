@@ -13,6 +13,9 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Flotte\Flotte.Web.csproj" />
+      <ProjectReference Include="..\Reservations\Reservations.Hexagon\Reservations.Hexagon.csproj" />
+      <ProjectReference Include="..\Reservations\Reservations.Infra\Reservations.Infra.csproj" />
+      <ProjectReference Include="..\Reservations\Reservations.Web\Reservations.Web.csproj" />
       <ProjectReference Include="..\Shared\Shared.Core\Shared.Core.csproj" />
       <ProjectReference Include="..\Shared\Shared.Web\Shared.Web.csproj" />
     </ItemGroup>
