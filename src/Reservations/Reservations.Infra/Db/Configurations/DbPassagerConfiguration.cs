@@ -15,12 +15,6 @@ namespace Reservations.Infra.Db.Configurations
             builder.Property(p => p.Prenom).IsRequired();
             builder.Property(p => p.DateDeNaissance).IsRequired();
             builder.Property(p => p.Email).IsRequired();
-
-            builder.Property(p => p.ReservationId).IsRequired();
-            builder
-                .HasOne(p => p.Reservation)
-                .WithMany()
-                .HasForeignKey(p => p.ReservationId);
         }
     }
 }

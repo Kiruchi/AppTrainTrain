@@ -20,6 +20,6 @@ namespace Reservations.Infra.Db.Models
         public int Id { get; set; }
         public int IdVoyage { get; set; }
         public int NumeroVoiture { get; set; }
-        public IReadOnlyCollection<DbPassager> Passagers { get; set; }
+        public List<DbPassager> Passagers { get; set; }
     }
 }

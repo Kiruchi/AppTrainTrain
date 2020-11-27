@@ -30,18 +30,11 @@ namespace Reservations.Infra.Migrations
                     DateDeNaissance = table.Column<DateTime>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Prenom = table.Column<string>(nullable: false),
-                    Nom = table.Column<string>(nullable: false),
-                    DbReservationId = table.Column<int>(nullable: true)
+                    Nom = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Passagers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Passagers_Reservations_DbReservationId",
-                        column: x => x.DbReservationId,
-                        principalTable: "Reservations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Passagers_Reservations_ReservationId",
                         column: x => x.ReservationId,
@@ -49,11 +42,6 @@ namespace Reservations.Infra.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Passagers_DbReservationId",
-                table: "Passagers",
-                column: "DbReservationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Passagers_ReservationId",

@@ -19,7 +19,7 @@ namespace Reservations.Infra
         {
             var dbReservation = DbReservation.FromDomain(reservation);
 
-            await _dbContext.AddAsync(dbReservation);
+            await _dbContext.Set<DbReservation>().AddAsync(dbReservation);
             await _dbContext.SaveChangesAsync();
         }
     }

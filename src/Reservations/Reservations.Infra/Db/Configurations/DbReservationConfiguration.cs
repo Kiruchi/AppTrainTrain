@@ -13,6 +13,11 @@ namespace Reservations.Infra.Db.Configurations
             builder.HasKey(p => p.Id);
             builder.Property(p => p.IdVoyage).IsRequired();
             builder.Property(p => p.NumeroVoiture).IsRequired();
+
+            builder
+                .HasMany(r => r.Passagers)
+                .WithOne()
+                .HasForeignKey(p => p.ReservationId);
         }
     }
 }

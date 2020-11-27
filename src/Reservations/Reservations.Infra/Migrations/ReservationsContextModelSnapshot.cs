@@ -28,9 +28,6 @@ namespace Reservations.Infra.Migrations
                     b.Property<DateTime>("DateDeNaissance")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DbReservationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -47,8 +44,6 @@ namespace Reservations.Infra.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DbReservationId");
 
                     b.HasIndex("ReservationId");
 
@@ -77,10 +72,6 @@ namespace Reservations.Infra.Migrations
                 {
                     b.HasOne("Reservations.Infra.Db.Models.DbReservation", null)
                         .WithMany("Passagers")
-                        .HasForeignKey("DbReservationId");
-
-                    b.HasOne("Reservations.Infra.Db.Models.DbReservation", "Reservation")
-                        .WithMany()
                         .HasForeignKey("ReservationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
