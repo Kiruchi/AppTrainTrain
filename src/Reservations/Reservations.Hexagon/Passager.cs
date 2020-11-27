@@ -4,9 +4,17 @@ namespace Reservations.Hexagon
 {
     public class Passager
     {
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
-        public DateTime DateDeNaissance { get; set; }
-        public string Email { get; set; }
+        public string Nom { get; }
+        public string Prenom { get; }
+        public DateTime DateDeNaissance { get; }
+        public string Email { get; }
+
+        public Passager(string nom, string prenom, DateTime dateDeNaissance, string email)
+        {
+            Nom = nom;
+            Prenom = prenom;
+            DateDeNaissance = dateDeNaissance;
+            Email = email;
+        }
     }
 }
