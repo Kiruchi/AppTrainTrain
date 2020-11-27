@@ -27,11 +27,22 @@ Dans le `csproj` ajouter les références pour EF :
 
 1. Le(s) DbModel(s) nécessaires pour sauvegarder une réservation
 2. Créer le fichier de configuration implémentant `IEntityTypeConfiguration<>` pour chaque DbModel
-3. Créer un `ReservationContext` héritant de `DbContext`
+    - Rappel pour la création de clé étrangère
+
+    ```csharp
+    builder.Property(p => p.ReservationId).IsRequired();
+    builder
+        .HasOne(p => p.Reservation)
+        .WithMany()
+        .HasForeignKey(p => p.ReservationId);
+    ```
+
+
+3. Créer un `ReservationsContext` héritant de `DbContext`
 ```csharp
-    public class FlotteContext : DbContext
+    public class ReservationsContext : DbContext
     {
-        public FlotteContext(DbContextOptions<FlotteContext> options)
+        public ReservationsContext(DbContextOptions<ReservationsContext> options)
             : base(options)
         {
         }
