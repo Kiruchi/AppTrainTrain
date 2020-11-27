@@ -5,6 +5,6 @@ namespace Reservations.Hexagon.PrimaryPorts
 {
     public interface IReservationUseCase
     {
-        Task ReserverAsync(int idVoyage, IReadOnlyCollection<Passager> passagers);
+        Task ReserverAsync(IdVoyage idVoyage, IReadOnlyCollection<Passager> passagers);
     }
 }

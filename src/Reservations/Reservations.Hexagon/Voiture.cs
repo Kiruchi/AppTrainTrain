@@ -11,7 +11,7 @@ namespace Reservations.Hexagon
     
     public class Voiture
     {
-        public Voiture(NumeroVoiture numero, int capacite, int placesOccupees)
+        public Voiture(NumeroVoiture numero, int capacite, int placesOccupees = 0)
         {
             Numero = numero;
             Capacite = capacite;

@@ -26,7 +26,7 @@ namespace Reservations.Hexagon.UseCases
             _notifieur = notifieur;
         }
         
-        public async Task ReserverAsync(int idVoyage, IReadOnlyCollection<Passager> passagers)
+        public async Task ReserverAsync(IdVoyage idVoyage, IReadOnlyCollection<Passager> passagers)
         {
             var train = await _trainRepository.GetTrainDuVoyageAsync(idVoyage);
             if (train == null)

@@ -2,9 +2,9 @@ using Shared.Core.Exceptions;
 
 namespace Reservations.Hexagon.Exceptions
 {
-    public class VoyageSansTrainException : NotFoundException<int>
+    public class VoyageSansTrainException : NotFoundException<IdVoyage>
     {
-        public VoyageSansTrainException(int id) : base(id)
+        public VoyageSansTrainException(IdVoyage id) : base(id)
         {
         }
     }
