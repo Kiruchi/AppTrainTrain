@@ -125,3 +125,18 @@ Créer une base de données vide nommée `TRAIN_TRAIN_RESERVATIONS`
 3. Lancer `dotnet ef migrations add InitReservations` pour créer les fichiers de migration
 4. Lancer `dotnet ef database update` pour lancer la migration
 
+
+### Tester l'api
+
+POST https://localhost:5001/reservations
+{
+    "idVoyage": 1213,
+    "passagers": [
+        {
+            "nom": "Moinard",
+            "prenom": "Christophe",
+            "email": "cmoinard@lucca.fr",
+            "dateDeNaissance": "1985-04-10T00:00:00"
+        }
+    ]
+}
