@@ -36,9 +36,6 @@ namespace Reservations.Hexagon.UseCases
                 throw new TrainPleinException();
 
             var reservation = train.Reserver(passagers, SeuilCapacite);
-            
-            // Refacto : Save en une seule fois
-            await _trainRepository.SaveAsync(train);
             await _reservationRepository.SaveAsync(reservation);
 
             await _notifieur.NotifierReservationValideeAsync(reservation);
