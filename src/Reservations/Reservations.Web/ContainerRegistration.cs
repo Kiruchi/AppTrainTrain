@@ -24,7 +24,7 @@ namespace Reservations.Web
             ServiceContainer.Register<IReservationUseCase, ReservationUseCase>();
             
             // Ports secondaires
-            ServiceContainer.Register<ITrainRepository, DummyTrainRepository>();
+            ServiceContainer.Register<ITrainRepository, TrainRepository>();
             ServiceContainer.Register<IReservationRepository, ReservationsRepository>();
             ServiceContainer.Register<IReservationNotifieur, DummyReservationNotifieur>();
         }

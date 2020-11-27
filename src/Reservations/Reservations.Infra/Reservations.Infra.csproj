@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Voyages\Voyages.Hexagon\Voyages.Hexagon.csproj" />
       <ProjectReference Include="..\Reservations.Hexagon\Reservations.Hexagon.csproj" />
     </ItemGroup>
     
