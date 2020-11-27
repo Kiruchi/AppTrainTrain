@@ -1,27 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Reservations.Hexagon.Exceptions;
 
 namespace Reservations.Hexagon
 {
     public class Train
     {
-        public Train(int idVoyage, IReadOnlyCollection<Voiture> voitures)
+        public Train(IdVoyage idVoyage, IReadOnlyCollection<Voiture> voitures)
         {
             IdVoyage = idVoyage;
             Voitures = voitures;
         }
 
-        public int IdVoyage { get; }
+        public IdVoyage IdVoyage { get; }
         public IReadOnlyCollection<Voiture> Voitures { get; }
 
-        public bool PeutReserver(int nbPassagers, decimal seuilCapacite) =>
+        public bool PeutReserver(int nbPassagers, TauxOccupation seuilCapacite) =>
             Voitures.Any(v => v.PeutReserver(nbPassagers, seuilCapacite));
 
-        public Reservation Reserver(IReadOnlyCollection<Passager> passagers, decimal seuilCapacite)
+        public Reservation Reserver(IReadOnlyCollection<Passager> passagers, TauxOccupation seuilCapacite)
         {
             if (!PeutReserver(passagers.Count, seuilCapacite))
-                throw new ArgumentException("train plein");
+                throw new TrainPleinException();
                 
             var voitureAvecDeLaPlace =
                 Voitures.First(v => v.PeutReserver(passagers.Count, seuilCapacite));

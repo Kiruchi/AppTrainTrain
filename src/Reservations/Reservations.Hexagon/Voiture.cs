@@ -1,27 +1,34 @@
 using System;
+using Reservations.Hexagon.Exceptions;
+using Shared.Core.DomainModeling;
 
 namespace Reservations.Hexagon
 {
+    public class NumeroVoiture : Id<int>
+    {
+        public NumeroVoiture(int internalValue) : base(internalValue) { }
+    }
+    
     public class Voiture
     {
-        public Voiture(int numero, int capacite, int placesOccupees)
+        public Voiture(NumeroVoiture numero, int capacite, int placesOccupees)
         {
             Numero = numero;
             Capacite = capacite;
             PlacesOccupees = placesOccupees;
         }
 
-        public int Numero { get; }
+        public NumeroVoiture Numero { get; }
         public int Capacite { get; }
         public int PlacesOccupees { get; private set; }
 
-        public bool PeutReserver(int nbPassagers, decimal seuilCapacite) =>
-            PlacesOccupees + nbPassagers < Capacite * seuilCapacite;
+        public bool PeutReserver(int nbPassagers, TauxOccupation seuilCapacite) =>
+            PlacesOccupees + nbPassagers < Capacite * (decimal)seuilCapacite;
 
-        public void Reserver(int nbPassagers, decimal seuilCapacite)
+        public void Reserver(int nbPassagers, TauxOccupation seuilCapacite)
         {
             if (!PeutReserver(nbPassagers, seuilCapacite))
-                throw new InvalidOperationException($"Voiture {Numero} pleine");
+                throw new VoiturePleineException(Numero);
 
             PlacesOccupees += nbPassagers;
         }

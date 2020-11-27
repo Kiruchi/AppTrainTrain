@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Reservations.Hexagon.Exceptions;
 using Reservations.Hexagon.PrimaryPorts;
 using Reservations.Hexagon.SecondaryPorts;
 using Shared.Core.Exceptions;
@@ -9,7 +10,7 @@ namespace Reservations.Hexagon.UseCases
 {
     public class ReservationUseCase : IReservationUseCase
     {
-        private const decimal SeuilCapacite = 0.7m;
+        private static readonly TauxOccupation SeuilCapacite = new TauxOccupation(70);
         
         private readonly ITrainRepository _trainRepository;
         private readonly IReservationRepository _reservationRepository;
@@ -29,10 +30,10 @@ namespace Reservations.Hexagon.UseCases
         {
             var train = await _trainRepository.GetTrainDuVoyageAsync(idVoyage);
             if (train == null)
-                throw new NotFoundException<int>(idVoyage);
+                throw new VoyageSansTrainException(idVoyage);
             
             if (!train.PeutReserver(passagers.Count, SeuilCapacite))
-                throw new ArgumentException("train plein");
+                throw new TrainPleinException();
 
             var reservation = train.Reserver(passagers, SeuilCapacite);
             
