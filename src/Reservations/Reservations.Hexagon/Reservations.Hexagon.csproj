@@ -4,10 +4,4 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="PrimaryPorts" />
-      <Folder Include="SecondaryPorts" />
-      <Folder Include="UseCases" />
-    </ItemGroup>
-
 </Project>
