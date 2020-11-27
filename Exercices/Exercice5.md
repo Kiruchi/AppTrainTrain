@@ -23,22 +23,10 @@ Dans le `csproj` ajouter les références pour EF :
 </ItemGroup>
 ```
 
-### Classes à créer
+### Partie obligatoire
 
-1. Le(s) DbModel(s) nécessaires pour sauvegarder une réservation
-2. Créer le fichier de configuration implémentant `IEntityTypeConfiguration<>` pour chaque DbModel
-    - Rappel pour la création de clé étrangère
-
-    ```csharp
-    builder.Property(p => p.ReservationId).IsRequired();
-    builder
-        .HasOne(p => p.Reservation)
-        .WithMany()
-        .HasForeignKey(p => p.ReservationId);
-    ```
-
-
-3. Créer un `ReservationsContext` héritant de `DbContext`
+1. Créer le(s) DbModel(s) nécessaires pour sauvegarder une réservation
+2. Créer un `ReservationsContext` héritant de `DbContext`
 ```csharp
     public class ReservationsContext : DbContext
     {
@@ -46,18 +34,46 @@ Dans le `csproj` ajouter les références pour EF :
             : base(options)
         {
         }
-        
+    }
+```
+
+3. Implémenter `IReservationRepository` en s'injectant le `ReservationsContext`
+
+
+
+
+
+### Partie moins importante et un peu relou à faire
+
+Voilà la configuration à faire pour sauvegarder dans la base de données.
+
+1. Créer le fichier de configuration implémentant `IEntityTypeConfiguration<>` pour chaque DbModel
+    - Rappel pour la création de clé étrangère
+
+    ```csharp
+    // dans la configuration de la réservation
+    builder
+        .HasMany(reservation => reservation.Passagers)
+        .WithOne()
+        .HasForeignKey(passager => passager.ReservationId);
+    ```
+
+
+2. Surcharger `OnModelCreating` de `ReservationsContext` pour y référencer les Configuration créées à l'étape 1
+```csharp
+    public class ReservationsContext : DbContext
+    {        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new /* Fichier de configuration créé précédemment */());
         }
     }
 ```
-4. Créer un fichier `ReservationContextFactory`, nécessaire pour la gérération des migrations
+
+3. Créer un fichier `ReservationsContextFactory`, nécessaire pour la gérération des migrations
 
 ```csharp
-
-public class ReservationContextFactory : IDesignTimeDbContextFactory<ReservationContext>
+public class ReservationsContextFactory : IDesignTimeDbContextFactory<ReservationContext>
 {
     public ReservationContext CreateDbContext(string[] args)
     {
@@ -70,19 +86,27 @@ public class ReservationContextFactory : IDesignTimeDbContextFactory<Reservation
             .AddJsonFile("appsettings.json")
             .Build();
 
-        var connectionString = configuration.GetConnectionString("Reservation");
-        var optionsBuilder = new DbContextOptionsBuilder<ReservationContext>();
+        var connectionString = configuration.GetConnectionString("Reservations");
+        var optionsBuilder = new DbContextOptionsBuilder<ReservationsContext>();
         optionsBuilder.UseSqlServer(connectionString);
         
-        return new ReservationContext(optionsBuilder.Options);
+        return new ReservationsContext(optionsBuilder.Options);
     }
 }
 ```
 
-5. Dans le fichier `appsettings.json` qui se trouve dans `Application.Web` (racine du projet), ajouter une `ConnectionString` :
+4. Dans le fichier `appsettings.json` qui se trouve dans `Application.Web` (racine du projet), ajouter une `ConnectionString` :
 
-    `"Flotte": "Data Source=.;Initial Catalog=TRAIN_TRAIN_RESERVATION;Integrated Security=True"`
+    `"Reservations": "Data Source=.;Initial Catalog=TRAIN_TRAIN_RESERVATIONS;Integrated Security=True"`
 
+5. Surcharger `RegisterDbContext` du `ContainerRegistration` dans `Reservations.Web`
+```csharp
+public override void RegisterDbContext(IServiceCollection services, IConfiguration configuration)
+{
+    services.AddDbContext<ReservationsContext>(options =>
+        options.UseSqlServer(configuration.GetConnectionString("Reservations")));
+}
+```
 
 ### Créer les bases
 
