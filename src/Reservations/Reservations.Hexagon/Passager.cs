@@ -15,17 +15,17 @@ namespace Reservations.Hexagon
 
     public class Passager
     {
-        public Passager(string nom, string prenom, DateTime dateTime, Email email)
+        public Passager(string nom, string prenom, DateTime dateDeNaissance, Email email)
         {
             Nom = nom;
             Prenom = prenom;
-            DateTime = dateTime;
+            DateDeNaissance = dateDeNaissance;
             Email = email;
         }
 
         public string Nom { get; }
         public string Prenom { get; }
-        public DateTime DateTime { get; }
+        public DateTime DateDeNaissance { get; }
         public Email Email { get; }
     }
 }

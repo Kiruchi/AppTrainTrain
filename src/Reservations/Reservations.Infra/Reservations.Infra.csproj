@@ -7,5 +7,12 @@
     <ItemGroup>
       <ProjectReference Include="..\Reservations.Hexagon\Reservations.Hexagon.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
+    </ItemGroup>
 
 </Project>

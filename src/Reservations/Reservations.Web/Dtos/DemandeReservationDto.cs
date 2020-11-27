@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Reservations.Web.Controllers
+namespace Reservations.Web.Dtos
 {
     public class DemandeReservationDto
     {

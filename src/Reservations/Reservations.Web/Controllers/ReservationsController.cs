@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Reservations.Hexagon;
 using Reservations.Hexagon.Exceptions;
 using Reservations.Hexagon.PrimaryPorts;
+using Reservations.Web.Dtos;
 
 namespace Reservations.Web.Controllers
 {
